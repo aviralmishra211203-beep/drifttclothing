@@ -35,7 +35,7 @@ export default async function ProductPage({
           {/* Product Details */}
           <div>
 
-            <p className="text-sm uppercase tracking-[0.3em] text-gray-500">
+            <p className="text-sm uppercase tracking-[0.3em] text-zinc-500">
               {product.category}
             </p>
 
@@ -43,24 +43,58 @@ export default async function ProductPage({
               {product.name}
             </h1>
 
-            <p className="mt-6 text-3xl font-semibold">
-              ₹{product.price}
+            <div className="mt-6 flex items-center gap-4">
+              <span className="text-4xl font-bold">
+                ₹{product.price}
+              </span>
+
+              <span className="text-xl text-zinc-500 line-through">
+                ₹{product.comparePrice}
+              </span>
+            </div>
+
+            {product.badge && (
+              <div className="mt-4 inline-flex rounded-full bg-white px-4 py-2 text-sm font-semibold uppercase tracking-wider text-black">
+                {product.badge}
+              </div>
+            )}
+
+            <p className="mt-8 leading-8 text-zinc-400">
+              {product.description}
             </p>
 
-            <p className="mt-8 leading-8 text-gray-400">
-              Crafted with premium heavyweight cotton for maximum comfort,
-              everyday wear, and timeless streetwear aesthetics.
-              Designed to become an essential piece in your wardrobe.
-            </p>
+            {/* Available Colors */}
+            <div className="mt-10">
+
+              <h3 className="mb-4 text-lg font-semibold">
+                Available Colors
+              </h3>
+
+              <div className="flex flex-wrap gap-3">
+
+                {product.colors.map((color) => (
+                  <span
+                    key={color}
+                    className="rounded-full border border-zinc-700 px-5 py-2 text-sm"
+                  >
+                    {color}
+                  </span>
+                ))}
+
+              </div>
+
+            </div>
 
             {/* Size Selection */}
             <div className="mt-10">
+
               <h3 className="mb-4 text-lg font-semibold">
                 Select Size
               </h3>
 
               <div className="flex flex-wrap gap-3">
-                {["S", "M", "L", "XL"].map((size) => (
+
+                {product.sizes.map((size) => (
                   <button
                     key={size}
                     className="rounded-xl border border-zinc-700 px-6 py-3 transition hover:border-white hover:bg-white hover:text-black"
@@ -68,24 +102,52 @@ export default async function ProductPage({
                     {size}
                   </button>
                 ))}
+
               </div>
+
+            </div>
+
+            {/* Stock Status */}
+            <div className="mt-8">
+
+              {product.inStock ? (
+                <span className="font-medium text-green-400">
+                  ✓ In Stock
+                </span>
+              ) : (
+                <span className="font-medium text-red-400">
+                  Out of Stock
+                </span>
+              )}
+
             </div>
 
             {/* Quantity */}
             <div className="mt-10">
+
               <h3 className="mb-4 text-lg font-semibold">
                 Quantity
               </h3>
 
               <div className="flex w-40 items-center justify-between rounded-xl border border-zinc-700 px-4 py-3">
-                <button className="text-xl">−</button>
+
+                <button className="text-xl">
+                  −
+                </button>
+
                 <span>1</span>
-                <button className="text-xl">+</button>
+
+                <button className="text-xl">
+                  +
+                </button>
+
               </div>
+
             </div>
 
-            {/* Action Buttons */}
-            <button className="mt-12 w-full rounded-xl bg-white py-4 text-lg font-semibold text-black transition hover:bg-gray-200">
+            {/* Buttons */}
+
+            <button className="mt-12 w-full rounded-xl bg-white py-4 text-lg font-semibold text-black transition hover:bg-zinc-200">
               Add to Cart
             </button>
 
@@ -93,7 +155,6 @@ export default async function ProductPage({
               Buy Now
             </button>
 
-            {/* Trust Badges */}
             <TrustBadges />
 
           </div>

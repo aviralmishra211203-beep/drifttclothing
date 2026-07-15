@@ -4,11 +4,12 @@ import { products } from "@/data/products";
 export default function ShopPage() {
   return (
     <main className="min-h-screen bg-black text-white">
-      <div className="max-w-7xl mx-auto px-6 py-16">
+      <div className="mx-auto max-w-7xl px-6 py-16">
 
         {/* Page Header */}
         <div className="mb-16">
-          <p className="uppercase tracking-[0.3em] text-gray-400 text-sm">
+
+          <p className="text-sm uppercase tracking-[0.3em] text-gray-400">
             DRIFTT
           </p>
 
@@ -20,20 +21,19 @@ export default function ShopPage() {
             Discover premium oversized streetwear designed for everyday comfort,
             confidence, and timeless style.
           </p>
+
         </div>
 
         {/* Product Grid */}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+
           {products.map((product) => (
             <ProductCard
               key={product.id}
-              id={product.id}
-              name={product.name}
-              price={product.price}
-              category={product.category}
-              badge={product.badge}
+              product={product}
             />
           ))}
+
         </div>
 
       </div>
